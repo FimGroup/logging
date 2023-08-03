@@ -16,11 +16,14 @@ type loggingManagerImpl struct {
 	hook                logrus.Hook
 	reportCaller        bool
 	enableConsoleOutput bool
+
+	loggerLevel logrus.Level
 }
 
 func (l *loggingManagerImpl) GetLogger(loggerName string) Logger {
 	loggerName = strings.TrimSpace(loggerName)
 	logger := logrus.New()
+	logger.SetLevel(l.loggerLevel)
 	if !l.enableConsoleOutput {
 		logger.Out = nilWriteCloser{}
 	}
@@ -47,13 +50,15 @@ func NewLoggerManager(filePathPrefix string, maxDays, maxFileSize, maxFilePerDay
 		hook:                hook,
 		reportCaller:        enableCallerInfo,
 		enableConsoleOutput: enableConsoleOutput,
+		loggerLevel:         lv,
 	}, err
 }
 
-func NewNoFileLoggerManager() LoggerManager {
+func NewNoFileLoggerManager(lv logrus.Level) LoggerManager {
 	return &loggingManagerImpl{
 		hook:         nil,
 		reportCaller: true,
+		loggerLevel:  lv,
 	}
 }
 

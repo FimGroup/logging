@@ -16,7 +16,7 @@ func TestSampleHook(t *testing.T) {
 	logger := manager.GetLogger("demoLogger001")
 	logger.WarnF("this is a demo warning logging message. parameter 01=[%s]", t.Name())
 
-	manager2 := logging.NewNoFileLoggerManager()
+	manager2 := logging.NewNoFileLoggerManager(logrus.InfoLevel)
 	logger2 := manager2.GetLogger("demoLogger002")
 	logger2.WarnF("this is a demo warning logging message. parameter 01=[%s]", t.Name())
 }
