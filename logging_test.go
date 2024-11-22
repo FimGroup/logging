@@ -28,8 +28,8 @@ func TestKeepLogging(t *testing.T) {
 	}
 	logger := manager.GetLogger("demoLogger001")
 
-	//const cnt = 10000000
-	const cnt = 100
+	const cnt = 100000
+	//const cnt = 100
 	for i := 0; i < cnt; i++ {
 		logger.WarnF("this is a demo warning logging message. parameter 01=[%s]", t.Name())
 		//time.Sleep(500 * time.Millisecond)

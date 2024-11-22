@@ -185,7 +185,7 @@ func (l *logrusLoggerHook) ensureFile(data []byte, entry *logrus.Entry) {
 				log.Printf("[ERROR] mkdirAll log file=[%s] failed=[%s].", filepath.Dir(newFileName), err)
 				return //do nothing when error
 			}
-			outputStream, err := l.fs.OpenFile(newFileName, os.O_CREATE|os.O_APPEND, 0644)
+			outputStream, err := l.fs.OpenFile(newFileName, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 			if err != nil {
 				log.Printf("[ERROR] open log file=[%s] failed=[%s].", newFileName, err)
 				return //do nothing when error
